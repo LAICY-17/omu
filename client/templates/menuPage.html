@@ -1,0 +1,14 @@
+<template name="menuPage">
+	<div>
+		<h1>This is the menu List</h1>
+			{{#each menulist}}
+			<li class="menuitm">{{menuitem}}</li>
+			{{/each}}
+		<h3>Standing Orders:</h3>
+			{{#each standingorders}}
+			<li>{{menuitem}}</li>
+			{{/each}}
+		<h3>Processed Orders:</h3>
+		<!-- loop through standing-orders-->
+	</div>
+</template>
