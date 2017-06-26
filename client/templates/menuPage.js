@@ -2,15 +2,9 @@ Template.menuPage.helpers({
 	menulist: function() {
 		return MenuList.find();
 	},
-	//'click .menuitm': function(event){
-		//console.log("You clicked a .player element");
-		////var y = JSON.parse(x);
-		////var target = event.menuitem;
-		//var z = this.menuitem;
-		//StandingOrders.insert({
-			//menuitem: z
-		//});
-	//}
+	standingorders: function() {
+		return StandingOrders.find({});
+	}
 });
 
 Template.menuPage.events({
@@ -21,6 +15,6 @@ Template.menuPage.events({
 	}
 });
 
-Template.menuPage.standingorders = function() {
-	return StandingOrders.find({});
-}
+// Template.menuPage.standingorders = function() {
+// 	return StandingOrders.find({});
+// }
