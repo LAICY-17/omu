@@ -8,12 +8,3 @@ Template.addMenuItemForm.events({
 		event.target.menuItemName.value=""; //clear the form after submission
 	}
 });
-
-Template.addMenuItemForm.events({
-	'click .remove2': function() {
-		const selectedMenuItem = Session.get('sMII');
-		MenuList.remove({
-			_id: selectedMenuItem
-		});
-	},
-});
