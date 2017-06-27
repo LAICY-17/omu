@@ -27,6 +27,11 @@ Template.menuPage.helpers({
 		);
 	},
 
+	'confirmedorders' : function() {
+		return ConfirmedOrders.find( {},
+			{ sort: { menuitem: 1 } }
+		);
+	},
 });
 
 Template.menuPage.events({
@@ -58,6 +63,7 @@ Template.menuPage.events({
 	},
 
 	'click .sendOrders': function() {
-		//
+		ConfirmedOrders = StandingOrders.cloneCollection();
+		StandingOrders.copyTo(ConfirmedOrders);
 	},
 });
