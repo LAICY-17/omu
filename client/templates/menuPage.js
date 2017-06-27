@@ -1,6 +1,8 @@
 Template.menuPage.helpers({
 	'menulist' : function() {
-		return MenuList.find();
+		return MenuList.find( {},
+			{ sort: { menuitem: 1 } }
+		);
 	},
 
 	'selectedMenuItem': function() {
@@ -20,7 +22,9 @@ Template.menuPage.helpers({
 	},
 
 	'standingorders' : function() {
-		return StandingOrders.find({});
+		return StandingOrders.find( {},
+			{ sort: { menuitem: 1 } }
+		);
 	},
 
 });
