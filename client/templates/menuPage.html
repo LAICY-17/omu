@@ -1,21 +1,34 @@
 <template name="menuPage">
 	<div>
 		<h1>This is the menu List</h1>
-			{{> addMenuItemForm}}
-			<button class="remove">Remove Menu Item</button>
-			{{#each menulist}}
-			<li class="menuitm {{selectedMenuItem}}">{{menuitem}}</li>
-			{{/each}}
+			{{> addMenuItemForm}}<br>
+			<ol>
+				{{#each menulist}}
+				<li class="menuitm {{selectedMenuItem}}">{{menuitem}}</li>
+				{{/each}}
+			</ol>
+			<br><button class="remove">Remove Menu Item</button>
 		<h3>Standing Orders:</h3>
-			<button class="removeOrder">Remove Selected Order</button>
+		<button class="removeOrder">Remove Selected Order</button><br><br>
+		<ol>
 			{{#each standingorders}}
 			<li class="orderitm {{selectedOrderItem}}">{{menuitem}}</li>
 			{{/each}}
-			<br><button class="sendOrders">Send orders to kitchen (currently don't know how to implement)</button>
+		</ol>
+			<br><button class="sendOrders">Confirm Orders & Send To Kitchen</button>
 		<h3>Confirmed Orders:</h3>
+		<ol>
 			{{#each confirmedorders}}
 			<li>{{menuitem}}</li>
 			{{/each}}
-			<button>Clear confirmed orders (TBA)</button>
+		</ol>
+			<br><button class="clearCfmOrders">Clear Confirmed Orders</button>
 	</div>
+</template>
+
+<template name="addMenuItemForm">
+	<form>
+		<input type="text" name="menuItemName" placeholder="Enter a menu item here">
+		<input type="submit" value="Add Menu Item">
+	</form>
 </template>
