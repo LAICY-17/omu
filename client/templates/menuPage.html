@@ -1,14 +1,21 @@
 <template name="menuPage">
 	<div>
 		<h1>This is the menu List</h1>
+			{{> addMenuItemForm}}
+			<button class="remove">Remove Menu Item</button>
 			{{#each menulist}}
-			<li class="menuitm">{{menuitem}}</li>
+			<li class="menuitm {{selectedMenuItem}}">{{menuitem}}</li>
 			{{/each}}
 		<h3>Standing Orders:</h3>
+			<button class="removeOrder">Remove Selected Order</button>
 			{{#each standingorders}}
+			<li class="orderitm {{selectedOrderItem}}">{{menuitem}}</li>
+			{{/each}}
+			<br><button class="sendOrders">Send orders to kitchen (currently don't know how to implement)</button>
+		<h3>Confirmed Orders:</h3>
+			{{#each confirmedorders}}
 			<li>{{menuitem}}</li>
 			{{/each}}
-		<h3>Processed Orders:</h3>
-		<!-- loop through standing-orders-->
+			<button>Clear confirmed orders (TBA)</button>
 	</div>
 </template>
