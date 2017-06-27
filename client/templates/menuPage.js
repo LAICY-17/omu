@@ -38,6 +38,7 @@ Template.menuPage.events({
 	'click .menuitm': function() {
 		const menuItemId = this._id;
 		Session.set('sMII', menuItemId);
+		console.log(menuItemId);
 		StandingOrders.insert({
 			menuitem: this.menuitem
 		});
@@ -63,7 +64,29 @@ Template.menuPage.events({
 	},
 
 	'click .sendOrders': function() {
-		ConfirmedOrders = StandingOrders.cloneCollection();
-		StandingOrders.copyTo(ConfirmedOrders);
+		// ConfirmedOrders = StandingOrders.cloneCollection();
+		StandingOrders.find().forEach(
+			function(doc) {
+				ConfirmedOrders.insert({
+					menuitem: doc.menuitem
+				});
+			}
+		);
+		Meteor.call('clearStandingOrders');
+	},
+
+	'click .clearCfmOrders': function() {
+		Meteor.call('clearConfirmedOrders');
+	},
+});
+
+Template.addMenuItemForm.events({
+	'submit form': function(event) {
+		event.preventDefault(); //prevents page from auto-refreshing when form is submitted
+		const menuItemName = event.target.menuItemName.value; //pull the value (i.e. the string) from the html item with name="menuItemName" and assign it to the const menuItemName
+		MenuList.insert({
+			menuitem: menuItemName
+		});
+		event.target.menuItemName.value=""; //clear the form after submission
 	},
 });
