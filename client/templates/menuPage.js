@@ -14,7 +14,3 @@ Template.menuPage.events({
 		});
 	}
 });
-
-// Template.menuPage.standingorders = function() {
-// 	return StandingOrders.find({});
-// }
