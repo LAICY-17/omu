@@ -8,4 +8,4 @@ Meteor.startup(function() {
 			return ConfirmedOrders.remove({});
 		},
 	});
-});
+})

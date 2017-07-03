@@ -39,9 +39,11 @@ Template.menuPage.events({
 		const menuItemId = this._id;
 		Session.set('sMII', menuItemId);
 		console.log(menuItemId);
-		StandingOrders.insert({
-			menuitem: this.menuitem
-		});
+		if(StandingOrders.find({menuitem: this.menuitem}).count() == 0) {
+			StandingOrders.insert({
+				menuitem: this.menuitem
+			});
+		}
 	},
 
 	'click .orderitm': function() {
@@ -64,7 +66,6 @@ Template.menuPage.events({
 	},
 
 	'click .sendOrders': function() {
-		// ConfirmedOrders = StandingOrders.cloneCollection();
 		StandingOrders.find().forEach(
 			function(doc) {
 				ConfirmedOrders.insert({
@@ -72,6 +73,7 @@ Template.menuPage.events({
 				});
 			}
 		);
+	
 		Meteor.call('clearStandingOrders');
 	},
 
