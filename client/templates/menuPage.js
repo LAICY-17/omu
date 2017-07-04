@@ -38,7 +38,6 @@ Template.menuPage.events({
 	'click .menuitm': function() {
 		const menuItemId = this._id;
 		Session.set('sMII', menuItemId);
-		console.log(menuItemId);
 		if(StandingOrders.find({menuitem: this.menuitem}).count() == 0) {
 			StandingOrders.insert({
 				menuitem: this.menuitem
@@ -68,8 +67,10 @@ Template.menuPage.events({
 	'click .sendOrders': function() {
 		StandingOrders.find().forEach(
 			function(doc) {
+				//const qty = event.target.qty.value;
 				ConfirmedOrders.insert({
-					menuitem: doc.menuitem
+					menuitem: doc.menuitem,
+				//	qty: qty
 				});
 			}
 		);
