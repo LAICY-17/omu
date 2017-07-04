@@ -13,7 +13,9 @@
 		<button class="removeOrder">Remove Selected Order</button><br><br>
 		<ol>
 			{{#each standingorders}}
-			<li class="orderitm {{selectedOrderItem}}">{{menuitem}}</li>
+			<li class="orderitm {{selectedOrderItem}}">{{menuitem}} &emsp;
+			<input type = 'number' size = '10' name = 'qty' value = '1' step = '1' min = '1' />
+			</li>
 			{{/each}}
 		</ol>
 			<br><button class="sendOrders">Confirm Orders & Send To Kitchen</button>
