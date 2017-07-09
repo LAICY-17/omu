@@ -9,7 +9,8 @@ Template.tableLogin.events({
 		if (tableCheckNo!=1234) {
 			document.getElementById("loginErrorMsg").innerHTML = "Incorrect Table ID, please check your table to see if you have keyed in the correct Table ID."
 		} else {
-			document.getElementById("loginErrorMsg").innerHTML = "generic success message"
+			Router.go('/menu');
+			//document.getElementById("loginErrorMsg").innerHTML = "generic success message"
 		}
 	}
 });
