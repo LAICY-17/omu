@@ -7,7 +7,9 @@
 			<input type="submit" value="Go!">
 		</form>
 		<p id="loginErrorMsg"></p>
-		<p>Table IDs are 6 digits long, the first 2 digits are the table number and the last 4 digits are the validation codes for the table number. Right now all validation codes are hardcoded as '1234'</p>
-		<p>eg '371235': '37' is the table number and '1235' is the validation code.</p>
+		<p>Rcode-Tablenum-Vcode</p>
+		<p>eg 'kfc-37-1235': 'kfc' is the restaurant code, '37' is the table number and '1235' is the validation code.</p>
+		<p>All validation codes are currently hardcoded as 1234</p>
+		<p>current Meteor user is: {{currentMeteorUser}}</p>
 	</div>
 </template>
