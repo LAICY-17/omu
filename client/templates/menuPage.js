@@ -14,14 +14,6 @@ Template.menuPage.helpers({
 		}
 	},
 
-	'selectedOrderItem': function() {
-		const orderItemId = this._id;
-		const selectedOrderItemId = Session.get('sOII');
-		if (orderItemId == selectedOrderItemId) {
-			return "selected";
-		}
-	},
-
 	'standingorders' : function() {
 		return StandingOrders.find( {},
 			{ sort: { menuitem: 1 } }
@@ -98,4 +90,9 @@ Template.menuPage.events({
 			StandingOrders.remove({_id: docID});
 		}
 	},
+
+	'click .del': function() {
+		const docID = this._id;
+		StandingOrders.remove({_id: docID});
+	}
 });
