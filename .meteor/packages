@@ -24,3 +24,4 @@ session
 iron:router
 accounts-ui
 accounts-password
+aldeed:simple-schema
