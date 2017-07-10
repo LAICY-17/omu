@@ -1,4 +1,7 @@
 Template.tablesList.helpers({
+	'restcode' : function() {
+		return OmuIRTV.findOne({ meteorUserId: Meteor.userId() }).rcode;
+	},
 	'tablelist' : function() {
 		return OmuIRTV.find(
 			{ meteorUserId: Meteor.userId() },
