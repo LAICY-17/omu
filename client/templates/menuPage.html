@@ -13,9 +13,10 @@
 		<button class="removeOrder">Remove Selected Order</button><br><br>
 		<ol>
 			{{#each standingorders}}
-			<li class="orderitm {{selectedOrderItem}}">{{menuitem}} &emsp; x{{qty}}
+			<li class="orderitm">{{menuitem}} &emsp; x{{qty}}
 				<button type="button" id="add" class="add">+</button>
 				<button type="button" id="sub" class="sub">-</button>
+				<button type="button" id="del" class="del">delete</button>
 			</li>
 			{{/each}}
 		</ol>
