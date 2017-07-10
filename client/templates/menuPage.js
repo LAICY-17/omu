@@ -1,7 +1,8 @@
 Template.menuPage.helpers({
 	'menulist' : function() {
-		return MenuList.find( {},
-			{ sort: { menuitem: 1 } }
+		return MenuList.find(
+			{ restAcc: Meteor.userId() },
+			{ sort: { menuitem: 1 } },
 		);
 	},
 
