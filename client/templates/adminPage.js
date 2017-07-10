@@ -45,7 +45,26 @@ Template.adminPage.events({
 			{ meteorUserId: Meteor.userId(),
 				rcode: { $exists: true } }
 		).count();
-		console.log(doesRcodeExist);
+		// console.log("TC: " + TC);
+		// console.log("rnum: " + rnum);
+		// console.log("rcode no: " + doesRcodeExist);
+		if (rcode == 0) {
+			OmuIRTV.insert({
+				meteorUserId: Meteor.userId(),
+				tablenum: (TC+1),
+				vcode: rnum,
+			});
+		} else {
+			const Rcode = OmuIRTV.findOne(
+				{ meteorUserId: Meteor.userId() }
+			).rcode();
+			OmuIRTV.insert({
+				meteorUserId: Meteor.userId(),
+				rcode: Rcode,
+				tablenum: (TC+1),
+				vcode: rnum,
+			});
+		}
 	},
 
 	'click .removeTable': function() {
