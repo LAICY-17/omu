@@ -30,10 +30,12 @@ Template.adminPage.events({
 		const Rcode = event.target.Rcode.value;
 		event.target.Rcode.value="";
 		console.log(Rcode);
-		OmuIRTV.update(
-			{ meteorUserId: Meteor.userId() },
-			{ $set: { rcode: Rcode } },
-		);
+		const x = Meteor.userId();
+		Meteor.call('updateRcode', [x, Rcode]);
+		// OmuIRTV.update(
+		// 	{ meteorUserId: Meteor.userId() },
+		// 	{ $set: { rcode: Rcode } },
+		// );
 	},
 
 	'click .addTable': function() {
