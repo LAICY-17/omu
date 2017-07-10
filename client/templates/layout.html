@@ -1,7 +1,13 @@
 <!-- this is forms the basis of every webpage as loaded by The Iron Router -->
 <!-- {{> yield}} is the template that The Iron Router will sub with other templates -->
 <template name="layout">
-	<p>{{> loginButtons}}</p>
+	<p>
+	{{#if currentUser}}
+	{{else}}
+	Restaurant Owner? 
+	{{/if}}
+	{{> loginButtons}}
+	</p>
 	{{#if currentUser}}
 	| <a href={{pathFor 'adminPage'}}>Admin Page</a> | 
 	<a href={{pathFor 'tableLogin'}}>Table Login</a> |
