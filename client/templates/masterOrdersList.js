@@ -1,21 +1,30 @@
 Template.masterOrdersList.helpers({
 	'orderlist': function() {
+		const Rcode = OmuIRTV.findOne({
+			meteorUserId: Meteor.userId()
+		}).rcode;
 		return ConfirmedOrders.find(
-			{ orderstatus: "(preparing)" },
+			{ orderstatus: "(preparing)", restCode: Rcode },
 			{ sort: { createdAt: 1 } },
 		);
 	},
 
 	'cookedlist': function() {
+		const Rcode = OmuIRTV.findOne({
+			meteorUserId: Meteor.userId()
+		}).rcode;
 		return ConfirmedOrders.find(
-			{ orderstatus: "(cooked)" },
+			{ orderstatus: "(cooked)", restCode: Rcode },
 			{ sort: { createdAt: 1 } },
 		);
 	},
 
 	'servedlist': function() {
+		const Rcode = OmuIRTV.findOne({
+			meteorUserId: Meteor.userId()
+		}).rcode;
 		return ConfirmedOrders.find(
-			{ orderstatus: "(served)" },
+			{ orderstatus: "(served)", restCode: Rcode },
 			{ sort: { createdAt: 1 } },
 		);
 	},

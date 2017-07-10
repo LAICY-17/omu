@@ -11,6 +11,17 @@ Template.adminPage.helpers({
 	},
 
 	'currentTableAmt' : function() {
+		const rnum = Math.floor(Math.random() * (9999 - 0 + 1)) + 0;
+		const x = OmuIRTV.find({
+			meteorUserId: Meteor.userId()
+		}).count();
+		if (x==0) {
+			OmuIRTV.insert({
+				meteorUserId: Meteor.userId(),
+				tablenum: 1,
+				vcode: rnum,
+			});
+		}
 		const noOftables = OmuIRTV.find({
 			meteorUserId: Meteor.userId()
 		}).count();
@@ -33,14 +44,37 @@ Template.adminPage.events({
 		event.preventDefault();
 		const Rcode = event.target.Rcode.value;
 		event.target.Rcode.value="";
-		console.log("new rcode is: " + Rcode);
+
+		//if an rcode exists for this user, extract the string into 'oldrcode'
+		var oldrcode;
+		const doesRcodeExist = OmuIRTV.find(
+			{ meteorUserId: Meteor.userId(),
+				rcode: { $exists: true } }
+		).count();
+		console.log(doesRcodeExist);
+		if (doesRcodeExist != 0) {
+			oldrcode = OmuIRTV.findOne({
+				meteorUserId: Meteor.userId()
+			}).rcode;
+			console.log(oldrcode);
+		}
+
+		// if rcode already exists in OmuIRTV, reject entry and exit function
+		const rcodeDuplicateConflict = OmuIRTV.find({
+			rcode: Rcode
+		}).count();
+		if (rcodeDuplicateConflict != 0) {
+			document.getElementById("editRcodeError").innerHTML = "This Restaurant Code already exists. Please try another."
+			return;
+		}
 
 		const SOC = StandingOrders.find().count();
 		const COC = ConfirmedOrders.find().count();
 		if (SOC == 0 && COC == 0) {
 			Meteor.call('updateRcode', {
-			  meteorId: Meteor.userId(),
-			  newRcode: Rcode,
+				meteorId: Meteor.userId(),
+				newRcode: Rcode,
+				oldRcode: oldrcode,
 			}, (err, res) => {
 			  if (err) {
 				alert(err);
@@ -48,6 +82,7 @@ Template.adminPage.events({
 				console.log("success");
 			  }
 			});
+			document.getElementById("editRcodeError").innerHTML = ""
 		} else {
 			document.getElementById("editRcodeError").innerHTML = "Note: You can only edit your Restaurant Code if there are no more pending or confirmed orders in your restaurant"
 		}
