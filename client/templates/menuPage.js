@@ -67,10 +67,9 @@ Template.menuPage.events({
 	'click .sendOrders': function() {
 		StandingOrders.find().forEach(
 			function(doc) {
-				//const qty = event.target.qty.value;
 				ConfirmedOrders.insert({
 					menuitem: doc.menuitem,
-				//	qty: qty
+					createdAt: new Date.now(),
 				});
 			}
 		);

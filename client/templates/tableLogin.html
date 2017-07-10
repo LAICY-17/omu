@@ -1,6 +1,5 @@
 <template name="tableLogin">
 	<div>
-		<p>{{> loginButtons}}</p>
 		<h1 style="text-align:center">Welcome to omu</h1>
 		<form style="text-align:center">
 			<input type="text" name="tableLoginID" placeholder="Enter your Table ID" required>
@@ -10,6 +9,6 @@
 		<p>Rcode-Tablenum-Vcode</p>
 		<p>eg 'kfc-37-1235': 'kfc' is the restaurant code, '37' is the table number and '1235' is the validation code.</p>
 		<p>All validation codes are currently hardcoded as 1234</p>
-		<p>current Meteor user is: {{currentMeteorUser}}</p>
+		<p>current Meteor user is: {{currentMeteorUserId}}</p>
 	</div>
 </template>

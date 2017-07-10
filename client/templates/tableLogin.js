@@ -1,5 +1,5 @@
 Template.tableLogin.helpers({
-	'currentMeteorUser' : function() {
+	'currentMeteorUserId' : function() {
 		return Meteor.userId();
 	},
 });

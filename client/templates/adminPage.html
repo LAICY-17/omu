@@ -1,7 +1,23 @@
 <template name="adminPage">
-	<p>Current Meteor User Id: </p>
-	<p>Current Resturant Code: </p>
+	<p>Current Meteor User Id: {{currentMeteorUserId}}</p>
+	<p>
+		Current Resturant Code: {{currentRestaurantCode}}<br>
+		<form>
+		<input type="text" name="Rcode" placeholder="Edit your Rcode here">
+		<input type="submit" value="Edit">
+		</form>
+	</p>
+	<p>
+		Current number of tables: {{currentTableAmt}}
+		<button>Add</button>
+		<button>Remove</button>
+	</p>
 	<p>Menu:</p>
+	<ol>
+		{{#each menulist}}
+		<li class="menuitm">{{menuitem}} <button class="menuDel">delete</button></li>
+		{{/each}}
+	</ol>
 	<br>
-	<p>Add menu form goes here</p>
+	{{> addMenuItemForm}}<br>
 </template>
