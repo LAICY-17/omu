@@ -32,7 +32,7 @@ Template.adminPage.events({
 		console.log("new rcode is: " + Rcode);
 
 		// v This Method only updates the first occurence, not ever occurence like it should (bug?)
-		// Meteor.call('updateRcode', Meteor.userId(), Rcode);
+		Meteor.call('updateRcode', Meteor.userId(), Rcode);
 
 		// v This method cannot be executed as it edits multiple documents
 		// v and client side code is untrusted to do that
@@ -41,62 +41,62 @@ Template.adminPage.events({
 		// 	{ $set: { rcode: Rcode } },
 		// );
 
-		const doesRcodeExist = OmuIRTV.find(
-			{ meteorUserId: Meteor.userId(),
-				rcode: { $exists: true } }
-		).count();
-		if (doesRcodeExist > 0) {
-			currRcode = OmuIRTV.findOne({
-				meteorUserId: Meteor.userId()
-			}).rcode;
-			// v Post Condition: rcode fields for this user are not empty
-			do {
-				var currRcodeCount = OmuIRTV.find({
-					meteorUserId: Meteor.userId(),
-					rcode: currRcode,
-				}).count();
-				console.log("a: " + currRcodeCount);
-				if (currRcodeCount > 0) {
-					var currRcodeId = OmuIRTV.findOne({
-						meteorUserId: Meteor.userId(),
-						rcode: currRcode,
-					})._id;
-					OmuIRTV.update(
-						{ _id: currRcodeId },
-						{ $set: { rcode: Rcode }}
-					);
-				}
-				var currRcodeCount = OmuIRTV.find({
-					meteorUserId: Meteor.userId(),
-					rcode: currRcode,
-				}).count();
-				console.log("b: " + currRcodeCount);
-			} while (currRcodeCount > 0);
-		} else {
-			// v Post Condition: Either one or many documents have no rcode field
-			do {
-				var currEmptyRcodeCount = OmuIRTV.find({
-					meteorUserId: Meteor.userId(),
-					rcode: { exists: false },
-				}).count();
-				console.log("c: " + currRcodeCount);
-				if (currEmptyRcodeCount > 0) {
-					var currRcodeId = OmuIRTV.findOne({
-						meteorUserId: Meteor.userId(),
-						rcode: { exists: false },
-					})._id;
-					OmuIRTV.update(
-						{ _id: currRcodeId },
-						{ $set: { rcode: Rcode }}
-					);
-				}
-				var currEmptyRcodeCount = OmuIRTV.find({
-					meteorUserId: Meteor.userId(),
-					rcode: { exists: false },
-				}).count();
-				console.log("d: " + currRcodeCount);
-			} while (currEmptyRcodeCount > 0);
-		}
+		// const doesRcodeExist = OmuIRTV.find(
+		// 	{ meteorUserId: Meteor.userId(),
+		// 		rcode: { $exists: true } }
+		// ).count();
+		// if (doesRcodeExist > 0) {
+		// 	currRcode = OmuIRTV.findOne({
+		// 		meteorUserId: Meteor.userId()
+		// 	}).rcode;
+		// 	// v Post Condition: rcode fields for this user are not empty
+		// 	do {
+		// 		var currRcodeCount = OmuIRTV.find({
+		// 			meteorUserId: Meteor.userId(),
+		// 			rcode: currRcode,
+		// 		}).count();
+		// 		console.log("a: " + currRcodeCount);
+		// 		if (currRcodeCount > 0) {
+		// 			var currRcodeId = OmuIRTV.findOne({
+		// 				meteorUserId: Meteor.userId(),
+		// 				rcode: currRcode,
+		// 			})._id;
+		// 			OmuIRTV.update(
+		// 				{ _id: currRcodeId },
+		// 				{ $set: { rcode: Rcode }}
+		// 			);
+		// 		}
+		// 		var currRcodeCount = OmuIRTV.find({
+		// 			meteorUserId: Meteor.userId(),
+		// 			rcode: currRcode,
+		// 		}).count();
+		// 		console.log("b: " + currRcodeCount);
+		// 	} while (currRcodeCount > 0);
+		// } else {
+		// 	// v Post Condition: Either one or many documents have no rcode field
+		// 	do {
+		// 		var currEmptyRcodeCount = OmuIRTV.find({
+		// 			meteorUserId: Meteor.userId(),
+		// 			rcode: { exists: false },
+		// 		}).count();
+		// 		console.log("c: " + currRcodeCount);
+		// 		if (currEmptyRcodeCount > 0) {
+		// 			var currRcodeId = OmuIRTV.findOne({
+		// 				meteorUserId: Meteor.userId(),
+		// 				rcode: { exists: false },
+		// 			})._id;
+		// 			OmuIRTV.update(
+		// 				{ _id: currRcodeId },
+		// 				{ $set: { rcode: Rcode }}
+		// 			);
+		// 		}
+		// 		var currEmptyRcodeCount = OmuIRTV.find({
+		// 			meteorUserId: Meteor.userId(),
+		// 			rcode: { exists: false },
+		// 		}).count();
+		// 		console.log("d: " + currRcodeCount);
+		// 	} while (currEmptyRcodeCount > 0);
+		// }
 	},
 
 	'click .addTable': function() {
