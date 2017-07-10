@@ -16,13 +16,13 @@ Template.menuPage.helpers({
 
 	'standingorders' : function() {
 		return StandingOrders.find( {},
-			{ sort: { menuitem: 1 } }
+			{ sort: { createdAt: 1 } }
 		);
 	},
 
 	'confirmedorders' : function() {
 		return ConfirmedOrders.find( {},
-			{ sort: { menuitem: 1 } }
+			{ sort: { createdAt: 1 } }
 		);
 	},
 });
@@ -35,7 +35,8 @@ Template.menuPage.events({
 		if(StandingOrders.find({menuitem: this.menuitem}).count() == 0) {
 			StandingOrders.insert({
 				menuitem: this.menuitem,
-				qty: 1
+				qty: 1,
+				createdAt: Date.now()
 			});
 		}
 		
@@ -66,7 +67,7 @@ Template.menuPage.events({
 				ConfirmedOrders.insert({
 					menuitem: doc.menuitem,
 					qty: doc.qty,
-					//createdAt: new Date.now(),
+					createdAt: Date.now(),
 				});
 			}
 		);
