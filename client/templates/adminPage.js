@@ -3,19 +3,18 @@ Template.adminPage.helpers({
 		return Meteor.userId();
 	},
 
-
 	'currentRestaurantCode' : function() {
+		const rcode = OmuIRTV.findOne({
+			meteorUserId: Meteor.userId()
+		}).rcode;
+		return rcode;
 	},
 
 	'currentTableAmt' : function() {
-		let doTablesExist = OmuIRTV.find({
+		const noOftables = OmuIRTV.find({
 			meteorUserId: Meteor.userId()
 		}).count();
-		console.log(doTablesExist);
-		if (doTablesExist == 0) {
-			console.log("time to insert a new one");
-		}
-		// return OmuIRTV.find({ meteorUserId: Meteor.userId() }).tables.count();
+		return noOftables;
 	},
 
 	'menulist' : function() {
@@ -31,16 +30,32 @@ Template.adminPage.events({
 		const Rcode = event.target.Rcode.value;
 		event.target.Rcode.value="";
 		console.log(Rcode);
-		// OmuIRTV.insert({
-		// 	meteorUserId: Meteor.userId(),
-		// 	rcode: Rcode,
-		// )};
+		// OmuIRTV.update(
+		// 	{ meteorUserId: Meteor.userId() },
+		// 	{ $set: { rcode: Rcode } },
+		// );
 	},
 
 	'click .addTable': function() {
+		const TC = OmuIRTV.find({
+			meteorUserId: Meteor.userId()
+		}).count();
+		const rnum = Math.floor(Math.random() * (9999 - 0 + 1)) + 0;
+		const doesRcodeExist = OmuIRTV.find(
+			{ meteorUserId: Meteor.userId(),
+				rcode: { $exists: true } }
+		).count();
+		console.log(doesRcodeExist);
 	},
 
 	'click .removeTable': function() {
+		const SOC = StandingOrders.find().count();
+		const COC = ConfirmedOrders.find().count();
+		const TC = OmuIRTV.find({
+			meteorUserId: Meteor.userId()
+		}).count();
+		if (SOC == 0 && COC == 0 && TC > 1) {
+		}
 	},
 
 	'click .menuDel': function() {
