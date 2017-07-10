@@ -12,6 +12,7 @@ Meteor.startup(function() {
 			OmuIRTV.update(
 				{ meteorUserId: x },
 				{ $set: { rcode: y } },
+				{ multi: true }
 			);
 		}
 	});

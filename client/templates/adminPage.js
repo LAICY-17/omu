@@ -32,8 +32,10 @@ Template.adminPage.events({
 		console.log("new rcode is: " + Rcode);
 
 		// v This Method only updates the first occurence, not ever occurence like it should (bug?)
-		Meteor.call('updateRcode', Meteor.userId(), Rcode);
-
+		Meteor.call('updateRcode', {
+			meteorUserId: Meteor.userId(),
+			rcode: Rcode,
+		});
 		// v This method cannot be executed as it edits multiple documents
 		// v and client side code is untrusted to do that
 		// OmuIRTV.update(
