@@ -31,17 +31,17 @@ Template.adminPage.events({
 		event.target.Rcode.value="";
 		console.log("new rcode is: " + Rcode);
 
-		Meteor.call('updateRcode', {
-			meteorId: Meteor.userId(),
-			newRcode: Rcode,
-		}, (err, res) => {
-			if (err) {
-				alert(err);
-			} else {
-				console.log("success");
-			}
-		});
-	},
+	    Meteor.call('updateRcode', {
+	      meteorId: Meteor.userId(),
+	      newRcode: Rcode,
+	    }, (err, res) => {
+	      if (err) {
+	        alert(err);
+	      } else {
+	        console.log("success");
+	      }
+	    });
+  	},
 
 	'click .addTable': function() {
 		const TC = OmuIRTV.find({
