@@ -1,3 +1,12 @@
 .selected {
 	background-color: yellow;
 }
+
+.cooked {
+	font-style: italic;
+}
+
+.cookednserved {
+	font-style: italic;
+	text-decoration: line-through;
+}

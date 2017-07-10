@@ -6,12 +6,14 @@
 		<input type="text" name="Rcode" placeholder="Edit your Rcode here">
 		<input type="submit" value="Edit">
 		</form>
+		<p id="editRcodeError"></p>
 	</p>
 
 	<p>
 		Current number of tables: {{currentTableAmt}}
 		<button class="addTable">Add</button>
 		<button class="removeTable">Remove</button>
+		<p id="removeErrorMsg"></p>
 	</p>
 
 	<h2>Menu:</h2>
@@ -22,4 +24,5 @@
 	</ol>
 	<br>
 	{{> addMenuItemForm}}<br>
+	<p id="deleteMenuError"></p>
 </template>

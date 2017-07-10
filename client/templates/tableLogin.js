@@ -10,7 +10,9 @@ Template.tableLogin.events({
 		const tableLoginID = event.target.tableLoginID.value;
 		const parsedTLID = tableLoginID.split('-');
 		const Rcode = parsedTLID[0].toString();
+		Session.set('CurrentResto', Rcode);
 		const TableNum = parseInt(parsedTLID[1]);
+		Session.set('CurrentTable', TableNum);
 		const Vcode = parsedTLID[2];
 		const actualVcode = OmuIRTV.findOne({
 			rcode: Rcode,

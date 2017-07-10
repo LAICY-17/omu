@@ -1,5 +1,6 @@
 <template name="menuPage">
 	<div>
+		<h2>Current Table: {{currenttabl}}</h2>
 		<h1>This is the menu List</h1>
 			<!-- {{> addMenuItemForm}}<br> -->
 			<ol>
@@ -10,7 +11,7 @@
 			<!-- <br><button class="remove">Remove Menu Item</button> -->
 
 		<h3>Standing Orders:</h3>
-		<button class="removeOrder">Remove Selected Order</button><br><br>
+		<!-- <button class="removeOrder">Remove Selected Order</button><br><br> -->
 		<ol>
 			{{#each standingorders}}
 			<li class="orderitm">{{menuitem}} &emsp; x{{qty}}
@@ -25,9 +26,9 @@
 		<h3>Confirmed Orders:</h3>
 		<ol>
 			{{#each confirmedorders}}
-			<li>{{menuitem}} &emsp; x{{qty}}</li>
+			<li>{{menuitem}} &emsp; x{{qty}} &emsp; {{orderstatus}}</li>
 			{{/each}}
 		</ol>
-			<br><button class="clearCfmOrders">Clear Confirmed Orders</button>
+			<!-- <br><button class="clearCfmOrders">Clear Confirmed Orders</button> -->
 	</div>
 </template>

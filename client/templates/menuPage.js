@@ -1,7 +1,14 @@
 Template.menuPage.helpers({
+	'currenttabl': function() {
+		const reecode = Session.get('CurrentResto');
+		const tabno = Session.get('CurrentTable');
+		return (reecode + " - " + tabno);
+	},
+
 	'menulist' : function() {
+		const Rcode = Session.get('CurrentResto');
 		return MenuList.find(
-			{ restAcc: Meteor.userId() },
+			{ restCode: Rcode },
 			{ sort: { menuitem: 1 } },
 		);
 	},
@@ -10,20 +17,29 @@ Template.menuPage.helpers({
 		const menuItemId = this._id;
 		const selectedMenuItemId = Session.get('sMII');
 		if (menuItemId == selectedMenuItemId) {
-
 			return "selected";
 		}
 	},
 
 	'standingorders' : function() {
-		return StandingOrders.find( {},
-			{ sort: { createdAt: 1 } }
+		const Rcode = Session.get('CurrentResto');
+		const CurrTable = Session.get('CurrentTable');
+		return StandingOrders.find({
+			restCode: Rcode,
+			tablenum: CurrTable,
+		},
+			{ sort: { menuitem: 1 } }
 		);
 	},
 
 	'confirmedorders' : function() {
-		return ConfirmedOrders.find( {},
-			{ sort: { createdAt: 1 } }
+		const Rcode = Session.get('CurrentResto');
+		const CurrTable = Session.get('CurrentTable');
+		return ConfirmedOrders.find({
+			restCode: Rcode,
+			tablenum: CurrTable,
+		},
+			{ sort: { createdAt: -1 } }
 		);
 	},
 });
@@ -32,12 +48,17 @@ Template.menuPage.events({
 	'click .menuitm': function() {
 		const menuItemId = this._id;
 		Session.set('sMII', menuItemId);
+		const Rcode = Session.get('CurrentResto');
+		const TabNum = Session.get('CurrentTable');
+		console.log(Rcode);
+		console.log(TabNum);
 		
 		if(StandingOrders.find({menuitem: this.menuitem}).count() == 0) {
 			StandingOrders.insert({
 				menuitem: this.menuitem,
 				qty: 1,
-				createdAt: Date.now()
+				restCode: Rcode,
+				tablenum: TabNum,
 			});
 		}
 		
@@ -68,7 +89,10 @@ Template.menuPage.events({
 				ConfirmedOrders.insert({
 					menuitem: doc.menuitem,
 					qty: doc.qty,
+					restCode: doc.restCode,
+					tablenum: doc.tablenum,
 					createdAt: Date.now(),
+					orderstatus: "(preparing)",
 				});
 			}
 		);
@@ -96,5 +120,12 @@ Template.menuPage.events({
 	'click .del': function() {
 		const docID = this._id;
 		StandingOrders.remove({_id: docID});
-	}
+	},
+
+	'click .testbutton': function() {
+		const reecode = Session.get('CurrentResto');
+		const tabno = Session.get('CurrentTable');
+		console.log(reecode);
+		console.log(tabno);
+	},
 });

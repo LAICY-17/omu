@@ -18,8 +18,12 @@ Template.adminPage.helpers({
 	},
 
 	'menulist' : function() {
-		return MenuList.find( {},
-			{sort: { createdAt: 1} }
+		const Rcode = OmuIRTV.findOne({
+			meteorUserId: Meteor.userId()
+		}).rcode;
+		return MenuList.find(
+			{ restCode: Rcode },
+			{sort: { menuitem: 1} }
 		);
 	},
 });
@@ -31,16 +35,22 @@ Template.adminPage.events({
 		event.target.Rcode.value="";
 		console.log("new rcode is: " + Rcode);
 
-	    Meteor.call('updateRcode', {
-	      meteorId: Meteor.userId(),
-	      newRcode: Rcode,
-	    }, (err, res) => {
-	      if (err) {
-	        alert(err);
-	      } else {
-	        console.log("success");
-	      }
-	    });
+		const SOC = StandingOrders.find().count();
+		const COC = ConfirmedOrders.find().count();
+		if (SOC == 0 && COC == 0) {
+			Meteor.call('updateRcode', {
+			  meteorId: Meteor.userId(),
+			  newRcode: Rcode,
+			}, (err, res) => {
+			  if (err) {
+				alert(err);
+			  } else {
+				console.log("success");
+			  }
+			});
+		} else {
+			document.getElementById("editRcodeError").innerHTML = "Note: You can only edit your Restaurant Code if there are no more pending or confirmed orders in your restaurant"
+		}
   	},
 
 	'click .addTable': function() {
@@ -55,6 +65,7 @@ Template.adminPage.events({
 		console.log("TC: " + TC);
 		console.log("rnum: " + rnum);
 		console.log("rcode no: " + doesRcodeExist);
+		document.getElementById("removeErrorMsg").innerHTML = ""
 		if (doesRcodeExist == 0) {
 			OmuIRTV.insert({
 				meteorUserId: Meteor.userId(),
@@ -89,13 +100,20 @@ Template.adminPage.events({
 			console.log(table_id);
 			OmuIRTV.remove({ _id: table_id });
 		} else {
-			console.log("Either Standing Orders or Confirmed Orders is not empty, make sure both are empty before rmeoving tables");
+			document.getElementById("removeErrorMsg").innerHTML = "Note: You can only remove tables if there are no more pending orders or customers in your restaurant"
 		}
 	},
 
 	'click .menuDel': function() {
-		const documentId = this._id;
-		MenuList.remove({ _id: documentId });
+		const SOC = StandingOrders.find().count();
+		const COC = ConfirmedOrders.find().count();
+
+		if (SOC == 0 && COC == 0) {
+			const documentId = this._id;
+			MenuList.remove({ _id: documentId });
+		} else {
+			document.getElementById("deleteMenuError").innerHTML = "Note: You can only delete menu items if there are no more orders in your restaurant"
+		}
 	},
 });
 

@@ -1,14 +1,29 @@
 <template name="masterOrdersList">
-	<button>Sort by time</button>
-	<button>Sort by table</button>
-	<br><br><br>
+	<!-- <button>Sort by time</button> -->
+	<!-- <button>Sort by table</button> -->
+	<!-- <br><br><br> -->
+	<strong>Orders:</strong><br><br>
 	{{#each orderlist}}
 	<li>
-		{{menuitem}}
-		<button>Mark as cooked</button>
-		<button>Mark as served</button>
+		Table {{tablenum}}: {{menuitem}}
+		<button class="markCooked">Mark as cooked</button>
 	</li>
 	{{/each}}
-	<br>
-	<p>todo: 'marked as cooked' will make it italicized, 'mark as served' will add a strikeout</p>
+
+	<br><strong>Cooked:</strong><br><br>
+	{{#each cookedlist}}
+	<li>
+		Table {{tablenum}}: {{menuitem}}
+		<button class="unmarkCooked">Unmark as cooked</button>
+		<button class="markServed">Mark as served</button>
+	</li>
+	{{/each}}
+
+	<br><strong>Served:</strong><br><br>
+	{{#each servedlist}}
+	<li>
+		Table {{tablenum}}: {{menuitem}}
+		<button class="unmarkServed">Unmark as served</button>
+	</li>
+	{{/each}}
 </template>
