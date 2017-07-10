@@ -9,14 +9,17 @@ Template.tableLogin.events({
 		event.preventDefault();
 		const tableLoginID = event.target.tableLoginID.value;
 		const parsedTLID = tableLoginID.split('-');
-		const rcode = parsedTLID[0];
-		const tablenum = parsedTLID[1];
-		const vcode = parsedTLID[2];
-		if (vcode!=1234) {
-			document.getElementById("loginErrorMsg").innerHTML = "Incorrect Table ID, please check your table to see if you have keyed in the correct Table ID."
-		} else {
+		const Rcode = parsedTLID[0].toString();
+		const TableNum = parseInt(parsedTLID[1]);
+		const Vcode = parsedTLID[2];
+		const actualVcode = OmuIRTV.findOne({
+			rcode: Rcode,
+			tablenum: TableNum,
+		}).vcode;
+		if (Vcode == actualVcode) {
 			Router.go('/menu');
-			//document.getElementById("loginErrorMsg").innerHTML = "generic success message"
+		} else {
+			document.getElementById("loginErrorMsg").innerHTML = "Incorrect Table ID, please check your table to see if you have keyed in the correct Table ID."
 		}
 	}
 });
