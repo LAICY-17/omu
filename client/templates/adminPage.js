@@ -30,10 +30,10 @@ Template.adminPage.events({
 		const Rcode = event.target.Rcode.value;
 		event.target.Rcode.value="";
 		console.log(Rcode);
-		// OmuIRTV.update(
-		// 	{ meteorUserId: Meteor.userId() },
-		// 	{ $set: { rcode: Rcode } },
-		// );
+		OmuIRTV.update(
+			{ meteorUserId: Meteor.userId() },
+			{ $set: { rcode: Rcode } },
+		);
 	},
 
 	'click .addTable': function() {
@@ -45,10 +45,10 @@ Template.adminPage.events({
 			{ meteorUserId: Meteor.userId(),
 				rcode: { $exists: true } }
 		).count();
-		// console.log("TC: " + TC);
-		// console.log("rnum: " + rnum);
-		// console.log("rcode no: " + doesRcodeExist);
-		if (rcode == 0) {
+		console.log("TC: " + TC);
+		console.log("rnum: " + rnum);
+		console.log("rcode no: " + doesRcodeExist);
+		if (doesRcodeExist == 0) {
 			OmuIRTV.insert({
 				meteorUserId: Meteor.userId(),
 				tablenum: (TC+1),
@@ -57,7 +57,8 @@ Template.adminPage.events({
 		} else {
 			const Rcode = OmuIRTV.findOne(
 				{ meteorUserId: Meteor.userId() }
-			).rcode();
+			).rcode;
+			console.log(Rcode);
 			OmuIRTV.insert({
 				meteorUserId: Meteor.userId(),
 				rcode: Rcode,
