@@ -7,12 +7,14 @@
 		<input type="submit" value="Edit">
 		</form>
 	</p>
+
 	<p>
 		Current number of tables: {{currentTableAmt}}
 		<button class="addTable">Add</button>
 		<button class="removeTable">Remove</button>
 	</p>
-	<p>Menu:</p>
+
+	<h2>Menu:</h2>
 	<ol>
 		{{#each menulist}}
 		<li class="menuitm">{{menuitem}} <button class="menuDel">delete</button></li>
