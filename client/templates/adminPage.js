@@ -57,6 +57,8 @@ Template.adminPage.events({
 				meteorUserId: Meteor.userId()
 			}).rcode;
 			console.log(oldrcode);
+		} else {
+			oldrcode = " ";
 		}
 
 		// if rcode already exists in OmuIRTV, reject entry and exit function
