@@ -70,8 +70,12 @@ Template.adminPage.events({
 			return;
 		}
 
-		const SOC = StandingOrders.find().count();
-		const COC = ConfirmedOrders.find().count();
+		const SOC = StandingOrders.find({
+			meteorUserId: Meteor.userId()
+		}).count();
+		const COC = ConfirmedOrders.find({
+			meteorUserId: Meteor.userId()
+		}).count();
 		if (SOC == 0 && COC == 0) {
 			Meteor.call('updateRcode', {
 				meteorId: Meteor.userId(),
@@ -124,8 +128,12 @@ Template.adminPage.events({
 	},
 
 	'click .removeTable': function() {
-		const SOC = StandingOrders.find().count();
-		const COC = ConfirmedOrders.find().count();
+		const SOC = StandingOrders.find({
+			meteorUserId: Meteor.userId()
+		}).count();
+		const COC = ConfirmedOrders.find({
+			meteorUserId: Meteor.userId()
+		}).count();
 		const TC = OmuIRTV.find({
 			meteorUserId: Meteor.userId()
 		}).count();
@@ -142,8 +150,12 @@ Template.adminPage.events({
 	},
 
 	'click .menuDel': function() {
-		const SOC = StandingOrders.find().count();
-		const COC = ConfirmedOrders.find().count();
+		const SOC = StandingOrders.find({
+			meteorUserId: Meteor.userId()
+		}).count();
+		const COC = ConfirmedOrders.find({
+			meteorUserId: Meteor.userId()
+		}).count();
 
 		if (SOC == 0 && COC == 0) {
 			const documentId = this._id;
