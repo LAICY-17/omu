@@ -4,6 +4,6 @@ Template.layout.events({
     }
 });
 
-// Accounts.onLogin(function(){
-// 	Router.go('/admin');
-// })
+Accounts.onLogin(function(){
+	Router.go('/admin');
+})
