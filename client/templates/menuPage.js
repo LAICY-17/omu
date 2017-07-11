@@ -28,7 +28,7 @@ Template.menuPage.helpers({
 			restCode: Rcode,
 			tablenum: CurrTable,
 		},
-			{ sort: { menuitem: 1 } }
+			{ sort: { createdAt: 1 } }
 		);
 	},
 
@@ -59,6 +59,7 @@ Template.menuPage.events({
 				qty: 1,
 				restCode: Rcode,
 				tablenum: TabNum,
+				createdAt: Date.now(),
 			});
 		}
 		
