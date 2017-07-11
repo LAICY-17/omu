@@ -71,10 +71,10 @@ Template.adminPage.events({
 		}
 
 		const SOC = StandingOrders.find({
-			meteorUserId: Meteor.userId()
+			restCode: oldrcode
 		}).count();
 		const COC = ConfirmedOrders.find({
-			meteorUserId: Meteor.userId()
+			restCode: oldrcode
 		}).count();
 		if (SOC == 0 && COC == 0) {
 			Meteor.call('updateRcode', {
@@ -128,33 +128,43 @@ Template.adminPage.events({
 	},
 
 	'click .removeTable': function() {
-		const SOC = StandingOrders.find({
+		Rcode = OmuIRTV.findOne({
 			meteorUserId: Meteor.userId()
+		}).rcode;
+		const SOC = StandingOrders.find({
+			restCode: Rcode
 		}).count();
 		const COC = ConfirmedOrders.find({
-			meteorUserId: Meteor.userId()
+			restCode: Rcode
 		}).count();
 		const TC = OmuIRTV.find({
 			meteorUserId: Meteor.userId()
 		}).count();
-		if (SOC == 0 && COC == 0 && TC > 1) {
-			const table_id = OmuIRTV.findOne({
-				meteorUserId: Meteor.userId(),
-				tablenum: TC,
-			})._id;
-			console.log(table_id);
-			OmuIRTV.remove({ _id: table_id });
+		if (SOC == 0 && COC == 0) {
+			if (TC > 1) {
+				const table_id = OmuIRTV.findOne({
+					meteorUserId: Meteor.userId(),
+					tablenum: TC,
+				})._id;
+				console.log(table_id);
+				OmuIRTV.remove({ _id: table_id });
+			} else {
+				document.getElementById("removeErrorMsg").innerHTML = "Note: You cannot have less than 1 table"
+			}
 		} else {
 			document.getElementById("removeErrorMsg").innerHTML = "Note: You can only remove tables if there are no more pending orders or customers in your restaurant"
 		}
 	},
 
 	'click .menuDel': function() {
-		const SOC = StandingOrders.find({
+		Rcode = OmuIRTV.findOne({
 			meteorUserId: Meteor.userId()
+		}).rcode;
+		const SOC = StandingOrders.find({
+			restCode: Rcode
 		}).count();
 		const COC = ConfirmedOrders.find({
-			meteorUserId: Meteor.userId()
+			restCode: Rcode
 		}).count();
 
 		if (SOC == 0 && COC == 0) {
