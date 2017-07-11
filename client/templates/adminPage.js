@@ -98,7 +98,7 @@ Template.adminPage.events({
 		const TC = OmuIRTV.find({
 			meteorUserId: Meteor.userId()
 		}).count();
-		const rnum = Math.floor(Math.random() * (9999 - 0 + 1)) + 0;
+		const rnum = Math.floor(Math.random() * 10000);
 		const doesRcodeExist = OmuIRTV.find(
 			{ meteorUserId: Meteor.userId(),
 				rcode: { $exists: true } }
