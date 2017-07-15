@@ -13,12 +13,15 @@ Template.tableLogin.events({
 		Session.set('CurrentResto', Rcode);
 		const TableNum = parseInt(parsedTLID[1]);
 		Session.set('CurrentTable', TableNum);
-		const Vcode = parsedTLID[2];
-		const actualVcode = OmuIRTV.findOne({
+		const Vcode = parseInt(parsedTLID[2]);
+		console.log(Rcode);
+		console.log(TableNum);
+		console.log(Vcode);
+		const VcodeCursor = OmuIRTV.findOne({
 			rcode: Rcode,
 			tablenum: TableNum,
-		}).vcode;
-		if (Vcode == actualVcode) {
+		});
+		if (VcodeCursor != undefined && Vcode == VcodeCursor.vcode) {
 			Router.go('/menu');
 		} else {
 			document.getElementById("loginErrorMsg").innerHTML = "Incorrect Table ID, please check your table to see if you have keyed in the correct Table ID."

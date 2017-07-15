@@ -1,2 +1,2 @@
-1) Login only catches invalid vcodes, not complete gibberish
+1) Login only catches invalid vcodes, not complete gibberish [FIXED]
 2)
