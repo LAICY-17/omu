@@ -5,7 +5,7 @@
 	<strong>Orders:</strong><br><br>
 	{{#each orderlist}}
 	<li>
-		Table {{tablenum}}: {{menuitem}} &emsp; x{{qty}}
+		Table {{tablenum}}: {{menuitem}} x{{qty}}
 		<button class="markCooked">Mark as cooked</button>
 	</li>
 	{{/each}}
@@ -13,7 +13,7 @@
 	<br><strong>Cooked:</strong><br><br>
 	{{#each cookedlist}}
 	<li>
-		Table {{tablenum}}: {{menuitem}} &emsp; x{{qty}}
+		Table {{tablenum}}: {{menuitem}} x{{qty}}
 		<button class="unmarkCooked">Unmark as cooked</button>
 		<button class="markServed">Mark as served</button>
 	</li>
@@ -22,7 +22,7 @@
 	<br><strong>Served:</strong><br><br>
 	{{#each servedlist}}
 	<li>
-		Table {{tablenum}}: {{menuitem}} &emsp; x{{qty}}
+		Table {{tablenum}}: {{menuitem}} x{{qty}}
 		<button class="unmarkServed">Unmark as served</button>
 	</li>
 	{{/each}}
