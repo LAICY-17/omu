@@ -3,8 +3,7 @@ Template.layout.events({
 		Router.go('/');
     }
 });
-/*
+
 Accounts.onLogin(function(){
 	Router.go('/admin');
 })
-*/
