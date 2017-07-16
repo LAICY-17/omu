@@ -66,8 +66,13 @@ Template.menuPage.events({
 		
 		const menuItemId = this._id;
 		Session.set('sMII', menuItemId);
-		
-		if(StandingOrders.find({menuitem: this.menuitem}).count() == 0) {
+		const existInSO = StandingOrders.find({
+			restCode: Rcode,
+			tablenum: TabNum,
+			menuitem: this.menuitem,
+		}).count();
+
+		if(existInSO == 0) {
 			StandingOrders.insert({
 				menuitem: this.menuitem,
 				qty: 1,
