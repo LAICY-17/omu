@@ -175,19 +175,3 @@ Template.adminPage.events({
 		}
 	},
 });
-
-// const ran = (Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0,5));
-//
-// const doesRcodeExist = OmuIRTV.find({
-// 	meteorUserId: Meteor.userId(),
-// 	// rcode: { $exists: true },
-// }).count();
-// console.log("rcode" + doesRcodeExist);
-// if (doesRcodeExist == 0) {
-// 	console.log("dicks");
-// }
-// const temp = OmuIRTV.findOne(
-// 	{ meteorUserId: Meteor.userId() },
-// 	// { fields: { rcode: 1 } },
-// );
-// return temp.rcode;
