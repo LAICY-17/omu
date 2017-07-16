@@ -3,7 +3,7 @@ Template.layout.events({
 		Router.go('/');
     },
 
-    'click .tablelogin': function(events) {
+    'click .tablelogin': function(event) {
     	event.preventDefault();
     	const userVcode = Session.get('CurrentVcode');
     	const Rcode = Session.get('CurrentResto');
