@@ -14,6 +14,7 @@ Template.tableLogin.events({
 		const TableNum = parseInt(parsedTLID[1]);
 		Session.set('CurrentTable', TableNum);
 		const Vcode = parseInt(parsedTLID[2]);
+		Session.set('CurrentVcode', Vcode);
 		console.log(Rcode);
 		console.log(TableNum);
 		console.log(Vcode);

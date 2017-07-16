@@ -4,7 +4,7 @@ Template.menuPage.helpers({
 		const tabno = Session.get('CurrentTable');
 		if (reecode == undefined || tabno == undefined) {
 			Router.go('/');
-			console.log("undefined tables, tell user to go back to login page");
+			return;
 		}
 		return (reecode + " - " + tabno);
 	},
@@ -50,12 +50,25 @@ Template.menuPage.helpers({
 
 Template.menuPage.events({
 	'click .menuitm': function() {
-		const menuItemId = this._id;
-		Session.set('sMII', menuItemId);
 		const Rcode = Session.get('CurrentResto');
 		const TabNum = Session.get('CurrentTable');
+		const userVcode = Session.get('CurrentVcode');
+		const VcodeCursor = OmuIRTV.find({
+			rcode: Rcode,
+			tablenum: TabNum,
+			vcode: userVcode,
+		});
+
+		if(VcodeCursor.count() == 0) {
+			Router.go('/');
+			return;
+		}
+		const menuItemId = this._id;
+		Session.set('sMII', menuItemId);
 		console.log(Rcode);
 		console.log(TabNum);
+		console.log(userVcode);
+		console.log(VcodeCursor);
 		
 		if(StandingOrders.find({menuitem: this.menuitem}).count() == 0) {
 			StandingOrders.insert({
@@ -89,6 +102,20 @@ Template.menuPage.events({
 	},
 
 	'click .sendOrders': function() {
+		const Rcode = Session.get('CurrentResto');
+		const TabNum = Session.get('CurrentTable');
+		const userVcode = Session.get('CurrentVcode');
+		const VcodeCursor = OmuIRTV.find({
+			rcode: Rcode,
+			tablenum: TabNum,
+			vcode: userVcode,
+		});
+
+		if(VcodeCursor.count() == 0) {
+			Router.go('/');
+			return;
+		}
+
 		StandingOrders.find().forEach(
 			function(doc) {
 				ConfirmedOrders.insert({
