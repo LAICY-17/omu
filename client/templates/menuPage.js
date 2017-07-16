@@ -79,6 +79,40 @@ Template.menuPage.events({
 		
 	},
 
+	'click .addmenuitm': function() {
+		const Rcode = Session.get('CurrentResto');
+		const TabNum = Session.get('CurrentTable');
+		const userVcode = Session.get('CurrentVcode');
+		const VcodeCursor = OmuIRTV.find({
+			rcode: Rcode,
+			tablenum: TabNum,
+			vcode: userVcode,
+		});
+
+		if(VcodeCursor.count() == 0) {
+			Router.go('/');
+			return;
+		}
+		
+		if(StandingOrders.find({menuitem: this.menuitem}).count() == 0) {
+			StandingOrders.insert({
+				menuitem: this.menuitem,
+				qty: 1,
+				restCode: Rcode,
+				tablenum: TabNum,
+				createdAt: Date.now(),
+			});
+		} else {
+			standingorderId = StandingOrders.findOne({
+				menuitem: this.menuitem
+			})._id;
+			StandingOrders.update(
+				{ _id: standingorderId },
+				{ $inc: { qty: 1 } },
+			);
+		}
+	},
+
 	'click .orderitm': function() {
 		const orderItemId = this._id;
 		Session.set('sOII', orderItemId);
