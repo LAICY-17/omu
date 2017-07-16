@@ -7,7 +7,7 @@ Template.addMenuItemForm.events({
 				rcode: { $exists: true } }
 		).count();
 		if (doesRcodeExist == 0) {
-		event.target.menuItemName.value="Set a Restaurant Code Before Adding Menu Items";
+		event.target.menuItemName.value="Add Rcode First!";
 		} else {
 			const Rcode = OmuIRTV.findOne({
 				meteorUserId: Meteor.userId()
