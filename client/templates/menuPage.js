@@ -84,6 +84,7 @@ Template.menuPage.events({
 		
 	},
 
+	/*
 	'click .addmenuitm': function() {
 		const Rcode = Session.get('CurrentResto');
 		const TabNum = Session.get('CurrentTable');
@@ -117,6 +118,7 @@ Template.menuPage.events({
 			);
 		}
 	},
+	*/
 
 	'click .orderitm': function() {
 		const orderItemId = this._id;
