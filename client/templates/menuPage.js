@@ -3,7 +3,7 @@ Template.menuPage.helpers({
 		const reecode = Session.get('CurrentResto');
 		const tabno = Session.get('CurrentTable');
 		if (reecode == undefined || tabno == undefined) {
-			document.getElementById("undefinedTableError").innerHTML = "<a href={{pathFor tableLogin}}>Click here to return to login page</a>"
+			// document.getElementById("undefinedTableError").href = {{pathFor 'tableLogin'}};
 			console.log("undefined tables, tell user to go back to login page");
 		}
 		return (reecode + " - " + tabno);
