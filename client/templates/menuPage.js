@@ -3,7 +3,11 @@ Template.menuPage.helpers({
 		const reecode = Session.get('CurrentResto');
 		const tabno = Session.get('CurrentTable');
 		if (reecode == undefined || tabno == undefined) {
+<<<<<<< HEAD
 			Router.go('/');
+=======
+			// document.getElementById("undefinedTableError").href = {{pathFor 'tableLogin'}};
+>>>>>>> e3d79c833c8c31a3986680b81c870618f751d6c3
 			console.log("undefined tables, tell user to go back to login page");
 		}
 		return (reecode + " - " + tabno);
