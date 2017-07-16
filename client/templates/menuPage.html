@@ -1,7 +1,7 @@
 <template name="menuPage">
 	<div>
 		<h2>Current Table: {{currenttabl}}</h2>
-		<h1>This is the menu List</h1>
+		<h1>Menu List:</h1>
 			<!-- {{> addMenuItemForm}}<br> -->
 			<ol>
 				{{#each menulist}}
@@ -10,7 +10,8 @@
 			</ol>
 			<!-- <br><button class="remove">Remove Menu Item</button> -->
 
-		<h3>Standing Orders:</h3>
+		<h3>Unconfirmed Orders:</h3>
+		<!-- unconfirmed orders is internally referred to as 'standing orders' -->
 		<!-- <button class="removeOrder">Remove Selected Order</button><br><br> -->
 		<ol>
 			{{#each standingorders}}
