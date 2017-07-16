@@ -63,12 +63,9 @@ Template.menuPage.events({
 			Router.go('/');
 			return;
 		}
+		
 		const menuItemId = this._id;
 		Session.set('sMII', menuItemId);
-		console.log(Rcode);
-		console.log(TabNum);
-		console.log(userVcode);
-		console.log(VcodeCursor);
 		
 		if(StandingOrders.find({menuitem: this.menuitem}).count() == 0) {
 			StandingOrders.insert({
