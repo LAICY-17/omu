@@ -1,2 +1,2 @@
 1) Login only catches invalid vcodes, not complete gibberish [FIXED]
-2)
+2) Previous customers retain access to the menupage indefinitely as long as they don't refresh their page [FIXED]
