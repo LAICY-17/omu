@@ -24,7 +24,8 @@ Template.tableLogin.events({
 		if (VcodeCursor != undefined && Vcode == VcodeCursor.vcode) {
 			Router.go('/menu');
 		} else {
-			document.getElementById("loginErrorMsg").innerHTML = "Incorrect Table ID, please check your table to see if you have keyed in the correct Table ID."
+			document.getElementById("loginErrorMsg").innerHTML = "<b>Incorrect Table ID, please check your table to see if you have keyed in the correct Table ID.</b>"
+			event.target.tableLoginID.value=""; //clear the form after invalid entry
 		}
 	}
 });
