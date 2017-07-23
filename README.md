@@ -13,10 +13,8 @@ This project hopes to eliminate (or greatly reduce) the required manpower in res
 * Dynamic updating of master order list
 * Constantly changing Table ID system that prevents pranksters outside the restaurant from spamming orders
 * Registration system for restaurants
-[//]: # (* Image support for menu list)
 * 'Recycle Bin' system that stores deleted entries, which can be 'restored' if needed
 * Different menu templates to choose from (for the restaurants)
-[//]: # (* QR code support)
 
 ### Technologies and tools to use
 * Meteor React/Blaze
@@ -30,5 +28,3 @@ This project hopes to eliminate (or greatly reduce) the required manpower in res
 2. Implement table ID (ever-changing table IDs)
 3. Implement restaurant registration (multiple restaurants)
 4. Implement menu customization ('add' and 'remove' from menu)
-[//]: # (5. Prettify website (with CSS))
-[//]: # (6. Implement other features (menu templates, image support, recycle bin...))
