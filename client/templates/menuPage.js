@@ -170,7 +170,16 @@ Template.menuPage.events({
 			}
 		);
 	
-		Meteor.call('clearStandingOrders');
+		Meteor.call('clearTableStandingOrders', {
+			Rcode: Rcode,
+			tabnum: TabNum,
+		}, (err, res) => {
+			if (err) {
+				alert(arr);
+			} else {
+				console.log("xuccess");
+			}
+		});
 	},
 
 	'click .clearCfmOrders': function() {
