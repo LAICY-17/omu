@@ -154,7 +154,10 @@ Template.menuPage.events({
 			return;
 		}
 
-		StandingOrders.find().forEach(
+		StandingOrders.find({
+			restCode: Rcode,
+			tablenum: TabNum,
+		}).forEach(
 			function(doc) {
 				ConfirmedOrders.insert({
 					menuitem: doc.menuitem,
@@ -167,7 +170,16 @@ Template.menuPage.events({
 			}
 		);
 	
-		Meteor.call('clearStandingOrders');
+		Meteor.call('clearTableStandingOrders', {
+			Rcode: Rcode,
+			tabnum: TabNum,
+		}, (err, res) => {
+			if (err) {
+				alert(arr);
+			} else {
+				console.log("xuccess");
+			}
+		});
 	},
 
 	'click .clearCfmOrders': function() {
