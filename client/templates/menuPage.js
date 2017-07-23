@@ -154,7 +154,10 @@ Template.menuPage.events({
 			return;
 		}
 
-		StandingOrders.find().forEach(
+		StandingOrders.find({
+			restCode: Rcode,
+			tablenum: TabNum,
+		}).forEach(
 			function(doc) {
 				ConfirmedOrders.insert({
 					menuitem: doc.menuitem,
