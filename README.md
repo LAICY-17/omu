@@ -33,6 +33,6 @@ This project hopes to eliminate (or greatly reduce) the required manpower in res
 3. Implement restaurant registration (multiple restaurants)
 4. Implement menu customization ('add' and 'remove' from menu)
 
-[comment]: # (5. Prettify website (with CSS))
+[comment]: # (5. Prettify website with CSS)
 
-[comment]: # (6. Implement other features (menu templates, image support, recycle bin...))
+[comment]: # (6. Implement other features e.g. menu templates, image support, recycle bin...)
