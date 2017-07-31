@@ -27,3 +27,4 @@ accounts-password
 aldeed:simple-schema
 gwendall:auth-client-callbacks
 force-ssl
+ostrio:files
