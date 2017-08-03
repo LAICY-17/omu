@@ -17,12 +17,11 @@
 	</p>
 
 	<h2>Menu:</h2>
-	<ol>
-		{{#each menulist}}
-		<li class="menuitm">{{menuitem}} <button class="menuDel">delete</button></li>
-		{{/each}}
-	</ol>
-	<br>
 	{{> addMenuItemForm}}<br>
 	<p id="deleteMenuError"></p>
+	<ol>
+		{{#each menulist}}
+		<li class="menuitm">{{menuitem}} : ${{itemprice}} <button class="menuDel">delete</button></li>
+		{{/each}}
+	</ol>
 </template>

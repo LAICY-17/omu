@@ -46,6 +46,40 @@ Template.menuPage.helpers({
 			{ sort: { createdAt: -1 } }
 		);
 	},
+
+	'unconfirmedcost' : function() {
+		return (this.itemprice * this.qty);
+	},
+
+	'confirmedtotalcost' : function() {
+		const Rcode = Session.get('CurrentResto');
+		const TabNum = Session.get('CurrentTable');
+		var confirmedtotalcost = 0;
+		ConfirmedOrders.find({
+			restCode: Rcode,
+			tablenum: TabNum,
+		}).forEach(
+			function(doc) {
+				confirmedtotalcost = confirmedtotalcost + doc.cost;
+			}
+		);
+		return +confirmedtotalcost.toFixed(2);
+	},
+
+	'unconfirmedtotalcost' : function() {
+		const Rcode = Session.get('CurrentResto');
+		const TabNum = Session.get('CurrentTable');
+		var unconfirmedtotalcost = 0;
+		StandingOrders.find({
+			restCode: Rcode,
+			tablenum: TabNum,
+		}).forEach(
+			function(doc) {
+				unconfirmedtotalcost = unconfirmedtotalcost + (doc.itemprice * doc.qty);
+			}
+		);
+		return +unconfirmedtotalcost.toFixed(2);
+	},
 });
 
 Template.menuPage.events({
@@ -63,7 +97,7 @@ Template.menuPage.events({
 			Router.go('/');
 			return;
 		}
-		
+
 		const menuItemId = this._id;
 		Session.set('sMII', menuItemId);
 		const existInSO = StandingOrders.find({
@@ -75,13 +109,14 @@ Template.menuPage.events({
 		if(existInSO == 0) {
 			StandingOrders.insert({
 				menuitem: this.menuitem,
+				itemprice: this.itemprice,
 				qty: 1,
 				restCode: Rcode,
 				tablenum: TabNum,
 				createdAt: Date.now(),
 			});
 		}
-		
+
 	},
 
 	/*
@@ -99,7 +134,7 @@ Template.menuPage.events({
 			Router.go('/');
 			return;
 		}
-		
+
 		if(StandingOrders.find({menuitem: this.menuitem}).count() == 0) {
 			StandingOrders.insert({
 				menuitem: this.menuitem,
@@ -161,6 +196,7 @@ Template.menuPage.events({
 			function(doc) {
 				ConfirmedOrders.insert({
 					menuitem: doc.menuitem,
+					cost: (doc.itemprice * doc.qty),
 					qty: doc.qty,
 					restCode: doc.restCode,
 					tablenum: doc.tablenum,
@@ -169,7 +205,7 @@ Template.menuPage.events({
 				});
 			}
 		);
-	
+
 		Meteor.call('clearTableStandingOrders', {
 			Rcode: Rcode,
 			tabnum: TabNum,

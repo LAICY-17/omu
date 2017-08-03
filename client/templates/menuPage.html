@@ -5,7 +5,7 @@
 			<!-- {{> addMenuItemForm}}<br> -->
 			<ol>
 				{{#each menulist}}
-				<li class="menuitm {{selectedMenuItem}}">{{menuitem}}</li>
+				<li class="menuitm {{selectedMenuItem}}">{{menuitem}}: ${{itemprice}}</li>
 				<!--<li>
 					{{menuitem}}
 					 <button class="addmenuitm">add</button>
@@ -23,17 +23,20 @@
 				<button type="button" id="add" class="add">+</button>
 				<button type="button" id="sub" class="sub">-</button>
 				<button type="button" id="del" class="del">delete</button>
+				${{unconfirmedcost}}
 			</li>
 			{{/each}}
 		</ol>
+		Total: ${{unconfirmedtotalcost}}
 			<br><button class="sendOrders">Confirm Orders</button>
 
 		<h3>Confirmed Orders:</h3>
 		<ol>
 			{{#each confirmedorders}}
-			<li>{{menuitem}}  x{{qty}}&emsp;{{orderstatus}}</li>
+			<li>{{menuitem}}  x{{qty}}&emsp;(${{cost}})&emsp;{{orderstatus}}</li>
 			{{/each}}
 		</ol>
+		Total: ${{confirmedtotalcost}}
 			<!-- <br><button class="clearCfmOrders">Clear Confirmed Orders</button> -->
 	</div>
 </template>
