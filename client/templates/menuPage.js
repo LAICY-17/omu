@@ -48,7 +48,7 @@ Template.menuPage.helpers({
 	},
 
 	'unconfirmedcost' : function() {
-		return (this.itemprice * this.qty);
+		return parseFloat(this.itemprice * this.qty).toFixed(2);
 	},
 
 	'confirmedtotalcost' : function() {
@@ -63,7 +63,7 @@ Template.menuPage.helpers({
 				confirmedtotalcost = confirmedtotalcost + doc.cost;
 			}
 		);
-		return +confirmedtotalcost.toFixed(2);
+		return parseFloat(confirmedtotalcost).toFixed(2);
 	},
 
 	'unconfirmedtotalcost' : function() {
@@ -78,7 +78,7 @@ Template.menuPage.helpers({
 				unconfirmedtotalcost = unconfirmedtotalcost + (doc.itemprice * doc.qty);
 			}
 		);
-		return +unconfirmedtotalcost.toFixed(2);
+		return parseFloat(unconfirmedtotalcost).toFixed(2);
 	},
 });
 
@@ -196,7 +196,7 @@ Template.menuPage.events({
 			function(doc) {
 				ConfirmedOrders.insert({
 					menuitem: doc.menuitem,
-					cost: (doc.itemprice * doc.qty),
+					cost: parseFloat(doc.itemprice * doc.qty).toFixed(2),
 					qty: doc.qty,
 					restCode: doc.restCode,
 					tablenum: doc.tablenum,
