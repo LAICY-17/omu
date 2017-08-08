@@ -1,4 +1,4 @@
 1) Login only catches invalid vcodes, not complete gibberish [FIXED]
 2) Previous customers retain access to the menupage indefinitely as long as they don't refresh their page [FIXED]
 3) Adding a menu item to standing orders locks up that menu item for everyone else [FIXED]
-4) total confirmed orders cost doesn't increase after the first round of orders
+4) total confirmed orders cost doesn't increase after the first round of orders [FIXED]
