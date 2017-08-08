@@ -60,7 +60,7 @@ Template.menuPage.helpers({
 			tablenum: TabNum,
 		}).forEach(
 			function(doc) {
-				confirmedtotalcost = confirmedtotalcost + doc.cost;
+				confirmedtotalcost = confirmedtotalcost + doc.cost * 1;
 			}
 		);
 		return parseFloat(confirmedtotalcost).toFixed(2);
