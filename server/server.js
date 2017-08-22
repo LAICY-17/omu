@@ -39,7 +39,7 @@ Accounts.validateLoginAttempt(function(options) {
     // Check the user's email is verified. If users may have multiple 
     // email addresses (or no email address) you'd need to do something
     // more complex.
-    if (options.user.verified === true) {
+    if (options.user.emails[0].verified === true) {
         return true;
     } else {
         throw new Meteor.Error('email-not-verified', 'You must verify your email address before you can log in');
