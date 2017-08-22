@@ -4,6 +4,6 @@
     "userName": "omu4orbital@gmail.com",
     "password": "password95",
     "host": "smtp.gmail.com",
-    "port": 465
+    "port": 587
   }
 }
