@@ -1,3 +1,5 @@
+import { Accounts } from 'meteor/accounts-base'
+
 Meteor.startup(function() {
 	return Meteor.methods({
 		clearStandingOrders: function() {
